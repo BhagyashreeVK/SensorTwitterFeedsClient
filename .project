@@ -3,6 +3,7 @@
 	<name>SensorTwitterFeedsClient</name>
 	<comment></comment>
 	<projects>
+		<project>SensorTwitterFeedsClient</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

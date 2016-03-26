@@ -4,6 +4,7 @@
   <artifactId>SensorTwitterFeedsClient</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
+  <name>SensorTwitterFeedsClient</name>
   <build>
     <sourceDirectory>src</sourceDirectory>
     <plugins>
@@ -26,12 +27,6 @@
     </plugins>
   </build>
   <dependencies>
-  	<dependency>
-  		<groupId>SensorTwitterFeeds</groupId>
-  		<artifactId>SensorTwitterFeeds</artifactId>
-  		<version>0.0.1-SNAPSHOT</version>
-  		<type>war</type>
-  	</dependency>
   	<dependency>
 	<groupId>org.glassfish.jersey.core</groupId>
 	<artifactId>jersey-client</artifactId>
