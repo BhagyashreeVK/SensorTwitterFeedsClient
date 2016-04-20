@@ -2,6 +2,7 @@ package com.twitterfeeds.client;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Properties;
 
@@ -39,7 +40,8 @@ public class WebServiceClient {
 		return client;
 	}
 	
-	private void getTweetsResponse() {
+	//Get Tweets
+	private void getTweetsResponse(int count) {
 		try {
 			Client client = getClientWithAuthenticationKeys();
 			MultivaluedMap<String, String> keys = new MultivaluedHashMap<String, String>();
@@ -55,7 +57,7 @@ public class WebServiceClient {
 			}
  
 			String output = response.getEntity(String.class);
-			System.out.println("\n============getTweetsResponse============");
+			System.out.println("\n============Get Tweets Response============");
 			System.out.println(output);
  
 		} catch (Exception e) {
@@ -63,8 +65,45 @@ public class WebServiceClient {
 		}
 	}
 	
+	// Search Tweets
+	private void searchTweetsResponse(String searchText, int count) {
+		try {
+			Client client = Client.create();
+			WebResource webResource = client.resource("http://localhost:8080/SensorTwitterFeeds/twitterfeeds/searchTweets?query=" + searchText + "&count=" + count);
+			ClientResponse response = webResource.get(ClientResponse.class);
+			if (response.getStatus() != 200) {
+				throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
+			}
+			String output = response.getEntity(String.class);
+			System.out.println("\n============Saerch Tweets Response============");
+			System.out.println(output);
+ 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	//Post Tweet
+	private void postTweetResponse(String status) {
+			try {
+				Client client = Client.create();
+				WebResource webResource = client.resource("http://localhost:8080/SensorTwitterFeeds/twitterfeeds/postTweet?text="+ URLEncoder.encode(status, "UTF-8"));
+				ClientResponse response = webResource.get(ClientResponse.class);
+				if (response.getStatus() != 200) {
+					throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
+				}
+				String output = response.getEntity(String.class);
+				System.out.println("\n============Post Tweets Response============");
+				System.out.println(output);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	}
+		
 	public static void main(String[] args) {
 		WebServiceClient wsClient = new WebServiceClient();
-		wsClient.getTweetsResponse();
+		wsClient.getTweetsResponse(5);
+		wsClient.searchTweetsResponse("FAN", 10);
+		wsClient.postTweetResponse("Test tweet from client project");
 	}
 }
