@@ -48,9 +48,10 @@ There are two ways of making web service operation calls using this project.
        An sample operation call would look like 
       "http://localhost:8080/SensorTwitterFeeds/twitterfeeds/searchTweets?query=Maryland&count=5"  
    
-   c. postTweet: This operation has two parameters - the "text" and "media"
+  c. postTweet: This operation has two parameters - "text" and second parameter could either be a "mediaFile" or a "mediaLink"
       The "text" parameter is the text of the status to be posted.
-      The "media" parameter is optional. As of now the web service only supports posting images through this parameter, using the URL of the image. 
-      The supported formats are - PNG, JPEG, BMP, WEBP, GIF, Animated GIF
-      An sample operation call would look like 
-      "http://localhost:8080/SensorTwitterFeeds/twitterfeeds/postTweet?text=TestTweet&media=http://www.tesimages.test-post.jpg"
+      The second parameter is either "mediaLink" or "mediaFile", which is optional. 
+      Only one of these could be used at a time,since only one image can be uploaded at a time using the web service.
+      "mediaLink" is the URL of the image to be posted along with the text.
+      "mediaFile" is the name of the image file saved in the resources folder of the project i.e. src/main/resources folder.
+      The supported formats are - PNG, JPEG, BMP, WEBP, GIF, Animated GIF    
